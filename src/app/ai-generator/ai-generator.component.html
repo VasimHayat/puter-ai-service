@@ -1,0 +1,171 @@
+<div class="min-h-screen bg-[#f6f1eb] flex flex-col items-center px-6 py-2">
+
+  <!-- Hero Section -->
+  <div class="text-center max-w-3xl">
+
+    <!-- Top Badge -->
+    <div class="inline-flex items-center gap-2 px-4 py-1 
+                rounded-full border border-orange-300 
+                text-orange-500 text-xs tracking-widest uppercase">
+      ● Neural Image Synthesis
+    </div>
+
+    <!-- Heading -->
+    <h1 class="mt-8 text-6xl md:text-7xl font-serif leading-tight"> 
+      <span class="text-gray-700">AI Image  <span class="text-orange-500">Studio</span></span>
+    </h1>
+
+    <!-- Subtext -->
+    <p class="mt-1 mb-3 text-gray-600 text-lg">
+      Describe anything. Watch it materialise. all powered by Puter.
+    </p>
+
+  </div>
+
+ <!-- Main Content Section -->
+<div class="mt-5 w-full max-w-7xl grid grid-cols-12 gap-10">
+
+  <!-- LEFT: Output Section -->
+  <div class="col-span-12 lg:col-span-7">
+
+    <div class="bg-white/70 backdrop-blur-md 
+            border border-gray-200 
+            rounded-3xl shadow-xl 
+            min-h-[520px] 
+            flex items-center justify-center p-6 relative overflow-hidden">
+
+  <!-- 🟠 Loading State -->
+  @if(loading){
+
+    <div class="flex flex-col items-center justify-center space-y-6">
+
+      <!-- Animated AI Orb -->
+      <div class="relative w-24 h-24">
+
+        <!-- Outer Glow -->
+        <div class="absolute inset-0 rounded-full 
+                    bg-gradient-to-r from-orange-400 to-orange-500 
+                    blur-xl opacity-40 animate-pulse">
+        </div>
+
+        <!-- Core Circle -->
+        <div class="relative w-24 h-24 rounded-full 
+                    bg-gradient-to-br from-orange-500 to-orange-600
+                    flex items-center justify-center 
+                    shadow-2xl animate-spin-slow">
+
+          <span class="text-white text-3xl">✨</span>
+
+        </div>
+
+      </div>
+
+      <!-- Text -->
+      <div class="text-center">
+        <p class="text-lg text-gray-700 font-medium">
+          Generating your image...
+        </p>
+        <p class="text-sm text-gray-400 mt-2">
+          This may take a few seconds
+        </p>
+      </div>
+
+      <!-- Animated Dots -->
+      <div class="flex space-x-2 mt-2">
+        <div class="w-2 h-2 bg-orange-400 rounded-full animate-bounce"></div>
+        <div class="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:.2s]"></div>
+        <div class="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:.4s]"></div>
+      </div>
+
+    </div>
+
+  }
+
+  <!-- 🟢 Generated Image -->
+  @else if(generatedImage){
+
+    <img [src]="generatedImage"
+         class="rounded-2xl shadow-2xl w-full object-contain 
+                transition-opacity duration-500"/>
+
+  }
+
+  <!-- ⚪ Empty State -->
+  @else {
+
+    <div class="text-center text-gray-400">
+      <div class="text-5xl mb-4 opacity-30">✨</div>
+      <p class="text-lg">Your creation will appear here</p>
+    </div>
+
+  }
+
+</div>
+
+  </div>
+
+
+  <!-- RIGHT: Prompt Section -->
+  <div class="col-span-12 lg:col-span-5">
+
+    <div class="bg-white 
+                border border-gray-200 
+                rounded-3xl shadow-2xl 
+                p-10 h-full flex flex-col">
+
+      <!-- Title -->
+      <h3 class="text-2xl font-semibold text-gray-800 mb-6">
+        Create Image
+      </h3>
+
+      <!-- Style Chips -->
+      <div class="flex flex-wrap gap-3 mb-6">
+
+        <button
+          *ngFor="let style of styles"
+          (click)="selectStyle(style)"
+          [ngClass]="selectedStyle === style 
+            ? 'bg-orange-100 border-orange-400 text-orange-600'
+            : 'bg-white border-gray-300 text-gray-600 hover:border-orange-300'"
+          class="px-4 py-1 rounded-full border text-sm transition">
+          {{ style }}
+        </button>
+
+      </div>
+
+      <!-- Prompt -->
+      <textarea
+        [(ngModel)]="prompt"
+        rows="4"
+        placeholder="Describe your imagination..."
+        class="w-full rounded-2xl border border-gray-300 
+               bg-gray-50 px-6 py-4 text-gray-700
+               focus:outline-none focus:ring-2 focus:ring-orange-300">
+      </textarea>
+
+      <!-- Spacer -->
+      <div class="flex-grow"></div>
+
+      <!-- Generate Button -->
+      <button
+        (click)="generateImage()"
+        [disabled]="loading"
+        class="mt-8 w-full py-4 rounded-xl 
+               bg-gradient-to-r from-orange-500 to-orange-600 
+               text-white font-medium text-lg
+               shadow-lg hover:shadow-xl 
+               transition-all duration-200
+               disabled:opacity-50">
+
+        {{ loading ? 'Generating...' : 'Generate Image →' }}
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+ 
+
+</div>

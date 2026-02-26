@@ -1,0 +1,8 @@
+{
+  "editor.fontFamily": "'GitLab Mono', Menlo, Monaco, 'Cascadia Code', monospace",
+  "editor.fontSize": 14,
+  "editor.fontWeight": "normal",
+  "editor.fontLigatures": true,
+  "editor.letterSpacing": 0,
+  "editor.lineHeight": 19
+}

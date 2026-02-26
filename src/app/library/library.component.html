@@ -1,0 +1,31 @@
+<div class="min-h-screen bg-slate-950 text-white p-8">
+
+  <div class="flex justify-between mb-8">
+    <h1 class="text-2xl font-bold">My AI Library</h1>
+    <button routerLink="/"
+      class="px-4 py-2 bg-indigo-600 rounded-lg">
+      Back to Generator
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div *ngFor="let image of images"
+         class="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+
+      <img [src]="image.url" class="h-60 w-full object-cover">
+
+      <div class="p-4">
+        <p class="text-sm text-gray-400 line-clamp-2">
+          {{ image.prompt }}
+        </p>
+        <p class="text-xs text-gray-500 mt-2">
+          {{ image.createdAt | date:'short' }}
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
